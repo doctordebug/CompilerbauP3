@@ -37,7 +37,9 @@ public class AbstractMachine {
     }
 
     private void showResult() {
+        System.out.println("________________________________________Ergebnis_______________________________________________");
         System.out.println("Das Ergebnis der Berechnung ist :" + stack[TOP]);
+        System.out.println("_______________________________________________________________________________________________");
     }
 
     public void execute(Instruction i) {
@@ -132,7 +134,6 @@ public class AbstractMachine {
                 break;
             case Instruction.POP:
                 stack[TOP] = null;
-                TOP--;
                 PC++;
                 break;
             case Instruction.NOP:
@@ -189,28 +190,12 @@ public class AbstractMachine {
     public void debug() {
 
         System.out.println();
-        System.out.println("TOP                -> STELLE: " + TOP + " WERT: " + stack[TOP]);
-        try {
-            System.out.println("FRAMEPOINTER       -> STELLE: " + FP + " WERT: " + stack[FP]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            if (FP < 0) {
-                System.out.println("FRAMEPOINTER       -> STELLE: " + FP + " (OHNE WERT)");
-            }
-        }
-        try {
-            System.out.println("PARAMETERPOINTER   -> STELLE: " + PP + " WERT: " + stack[PP]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            if (PP < 0) {
-                System.out.println("PARAMETERPOINTER   -> STELLE: " + PP + " (OHNE WERT)");
-            }
-        }
-        try {
-            System.out.println("PROGRAMCOUNTER   -> STELLE: " + PC + " ANWEISUNG:" + program[PC]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            if (PC < 0) {
-                System.out.println("PROGRAMCOUNTER     -> " + PC + " (KEINE ANWEISUNG)");
-            }
-        }
+        System.out.println("_______________________________________________________________________________________________");
+        System.out.println("WERTE:");
+        System.out.println("TOP: "+TOP);
+        System.out.println("FP: "+FP);
+        System.out.println("PP: "+PP);
+        System.out.println("PC: "+PC);
         System.out.println("________________________________________Aktueller Stack________________________________________");
         System.out.println(Arrays.toString(stack));
         System.out.println("_______________________________________________________________________________________________");

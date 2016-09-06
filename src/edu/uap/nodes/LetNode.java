@@ -1,7 +1,6 @@
 
 package edu.uap.nodes;
 
-import com.sun.deploy.util.ArrayUtil;
 import edu.uap.Compiler.AddressPair;
 import edu.uap.Compiler.Instruction;
 import edu.uap.Compiler.TramLabel;
@@ -21,8 +20,8 @@ public class LetNode extends Node
         n++;
         TramLabel l = new TramLabel();
         LinkedList<Instruction> result = new LinkedList<>();
-        result.add(new Instruction(Instruction.GOTO, l));
 
+        result.add(new Instruction(Instruction.GOTO, l));
         elab_def(rho, n);
 
         for (Node def : getFunctions()) {
@@ -30,7 +29,9 @@ public class LetNode extends Node
         }
 
         /*Wie in if-node: Label generieren*/
-        result.add(new Instruction(Instruction.NOP, l));
+        Instruction nop = new Instruction(Instruction.NOP);
+        nop.setLabel(l);
+        result.add(nop);
 
         for (Node body : getBody()) {
             result.addAll(body.code(rho, n));
